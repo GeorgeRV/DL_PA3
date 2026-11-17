@@ -1,0 +1,151 @@
+{
+  "f1_macro": 0.17393375527425048,
+  "accuracy": 0.23057953144266338,
+  "n_examples": 811,
+  "per_class": {
+    "american_black_bear": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 82.0
+    },
+    "american_crow": {
+      "precision": 0.21428571428571427,
+      "recall": 0.09523809523809523,
+      "f1-score": 0.13186813186813187,
+      "support": 63.0
+    },
+    "bird": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 22.0
+    },
+    "bobcat": {
+      "precision": 0.038461538461538464,
+      "recall": 0.029411764705882353,
+      "f1-score": 0.03333333333333333,
+      "support": 34.0
+    },
+    "chicken": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 60.0
+    },
+    "coyote": {
+      "precision": 0.05063291139240506,
+      "recall": 0.12903225806451613,
+      "f1-score": 0.07272727272727272,
+      "support": 31.0
+    },
+    "dog": {
+      "precision": 0.5208333333333334,
+      "recall": 0.746268656716418,
+      "f1-score": 0.6134969325153374,
+      "support": 67.0
+    },
+    "domestic_cat": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 48.0
+    },
+    "eastern_chipmunk": {
+      "precision": 0.782608695652174,
+      "recall": 0.5806451612903226,
+      "f1-score": 0.6666666666666666,
+      "support": 31.0
+    },
+    "eastern_cottontail": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 26.0
+    },
+    "eastern_fox_squirrel": {
+      "precision": 0.4782608695652174,
+      "recall": 0.34375,
+      "f1-score": 0.4,
+      "support": 32.0
+    },
+    "eastern_gray_squirrel": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 34.0
+    },
+    "grey_fox": {
+      "precision": 0.08571428571428572,
+      "recall": 0.23076923076923078,
+      "f1-score": 0.125,
+      "support": 39.0
+    },
+    "horse": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "northern_raccoon": {
+      "precision": 0.21428571428571427,
+      "recall": 0.1111111111111111,
+      "f1-score": 0.14634146341463414,
+      "support": 27.0
+    },
+    "red_fox": {
+      "precision": 1.0,
+      "recall": 0.023255813953488372,
+      "f1-score": 0.045454545454545456,
+      "support": 43.0
+    },
+    "striped_skunk": {
+      "precision": 0.1891891891891892,
+      "recall": 0.22580645161290322,
+      "f1-score": 0.20588235294117646,
+      "support": 31.0
+    },
+    "virginia_opossum": {
+      "precision": 0.5411764705882353,
+      "recall": 0.8363636363636363,
+      "f1-score": 0.6571428571428571,
+      "support": 55.0
+    },
+    "white_tailed_deer": {
+      "precision": 0.17777777777777778,
+      "recall": 0.24242424242424243,
+      "f1-score": 0.20512820512820512,
+      "support": 33.0
+    },
+    "wild_turkey": {
+      "precision": 0.11475409836065574,
+      "recall": 0.25925925925925924,
+      "f1-score": 0.1590909090909091,
+      "support": 27.0
+    },
+    "woodchuck": {
+      "precision": 0.1095890410958904,
+      "recall": 0.7272727272727273,
+      "f1-score": 0.19047619047619047,
+      "support": 22.0
+    },
+    "accuracy": 0.23057953144266338,
+    "macro avg": {
+      "precision": 0.21512236379533958,
+      "recall": 0.218124209941992,
+      "f1-score": 0.17393375527425048,
+      "support": 811.0
+    },
+    "weighted avg": {
+      "precision": 0.23424474930677897,
+      "recall": 0.23057953144266338,
+      "f1-score": 0.1909095792807658,
+      "support": 811.0
+    }
+  },
+  "cross_entropy_loss": 2.776586417352227,
+  "num_parameters": 342453,
+  "checkpoint_epoch": 21,
+  "checkpoint_val_f1_macro": 0.1782251080478266,
+  "test_split": "test_public"
+}
