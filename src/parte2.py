@@ -452,15 +452,28 @@ def save_summary(experiments, args):
                                 num_workers=args.num_workers)
         for exp in budget5.to_dict("records"):
             ckpt = torch.load(exp["checkpoint"], map_location=args.device)
-            model = build_model("resnet18", num_classes=len(ckpt["class_names"]), pretrained=False).to(args.device)
+            checkpoint_class_names = ckpt["class_names"]
+
+            model = build_model(
+                "resnet18",
+                num_classes=len(checkpoint_class_names),
+                pretrained=False
+            ).to(args.device)
             model.load_state_dict(ckpt["state_dict"])
             model.eval(); ys, ps = [], []
             with torch.no_grad():
                 for x, y, _ in val_loader:
                     pred = model(x.to(args.device)).argmax(1).cpu().tolist()
                     ys.extend(y.tolist()); ps.extend(pred)
-            scores = f1_score(ys, ps, labels=list(range(len(class_names))), average=None, zero_division=0)
-            for name, score in zip(class_names, scores):
+            scores = f1_score(
+                ys,
+                ps,
+                labels=list(range(len(checkpoint_class_names))),
+                average=None,
+                zero_division=0
+            )
+
+            for name, score in zip(checkpoint_class_names, scores):
                 class_rows.append({"method": exp["method"], "seed": exp["seed"],
                                    "class": name, "val_f1": float(score)})
             del model
