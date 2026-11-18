@@ -1,0 +1,11 @@
+metodo,orcamento,seed,f1_macro_validacao,acuracia_validacao,best_val_loss,checkpoint
+supervised,1,42,0.22119403108335267,0.26732673267326734,2.7097970920033974,outputs/parte2/supervised/budget_1/seed_42/best_model.pth
+fixmatch_aligned,1,42,0.23599457633790238,0.26732673267326734,4.066583779778811,outputs/parte2/fixmatch_aligned/budget_1/seed_42/best_model.pth
+supervised,5,42,0.41697259578651696,0.41089108910891087,2.0720059021864787,outputs/parte2/supervised/budget_5/seed_42/best_model.pth
+fixmatch_aligned,5,42,0.4408376007253636,0.4405940594059406,2.411571142697098,outputs/parte2/fixmatch_aligned/budget_5/seed_42/best_model.pth
+supervised,5,100,0.3642521494645763,0.35148514851485146,2.2195891767445177,outputs/parte2/supervised/budget_5/seed_100/best_model.pth
+fixmatch_aligned,5,100,0.4513496060190482,0.4504950495049505,5.463955787148806,outputs/parte2/fixmatch_aligned/budget_5/seed_100/best_model.pth
+supervised,5,200,0.42079576805198404,0.4207920792079208,2.06533950390202,outputs/parte2/supervised/budget_5/seed_200/best_model.pth
+fixmatch_aligned,5,200,0.4657826845616415,0.46534653465346537,4.903343181798954,outputs/parte2/fixmatch_aligned/budget_5/seed_200/best_model.pth
+supervised,20,42,0.5928267551232251,0.594059405940594,1.540853679622754,outputs/parte2/supervised/budget_20/seed_42/best_model.pth
+fixmatch_aligned,20,42,0.5843783652039586,0.599009900990099,2.5757233718834303,outputs/parte2/fixmatch_aligned/budget_20/seed_42/best_model.pth
