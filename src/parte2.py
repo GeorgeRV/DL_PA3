@@ -372,6 +372,53 @@ def plot_history(history: pd.DataFrame, path: Path, method: str, budget: int, se
     plt.close(fig)
 
 
+def save_test_public_class_gains(output_dir: Path) -> pd.DataFrame:
+    """Resume o ganho por classe no orçamento 5 usando os resultados do test_public."""
+    per_class = pd.read_csv(output_dir / "test_public_f1_por_classe.csv")
+    budget5 = per_class[per_class["budget"] == 5].copy()
+    pivot = budget5.pivot(index=["seed", "class"], columns="method", values="test_f1").reset_index()
+    pivot["ganho"] = pivot["fixmatch_aligned"] - pivot["supervised"]
+
+    summary = pivot.groupby("class", as_index=False).agg(
+        fixmatch_f1_mean=("fixmatch_aligned", "mean"),
+        fixmatch_f1_std=("fixmatch_aligned", "std"),
+        supervised_f1_mean=("supervised", "mean"),
+        supervised_f1_std=("supervised", "std"),
+        ganho_medio=("ganho", "mean"),
+        ganho_std=("ganho", "std"),
+    )
+    for column in ("fixmatch_f1_std", "supervised_f1_std", "ganho_std"):
+        summary[column] = summary[column].fillna(0)
+    summary = summary.sort_values("ganho_medio", ascending=False)
+    summary.to_csv(
+        output_dir / "ganho_por_classe_orcamento_5_test_public.csv",
+        index=False,
+    )
+
+    fig, ax = plt.subplots(figsize=(10, 8))
+    colors = ["#2ca02c" if gain > 0 else "#d62728" for gain in summary["ganho_medio"]]
+    ax.barh(
+        summary["class"],
+        summary["ganho_medio"],
+        xerr=summary["ganho_std"],
+        color=colors,
+        capsize=2,
+    )
+    ax.axvline(0, color="black", linewidth=1)
+    ax.invert_yaxis()
+    ax.set_xlabel("Ganho médio de F1 — FixMatch aligned - piso supervisionado")
+    ax.set_ylabel("Classe")
+    ax.set_title("Ganho por classe no orçamento de 5 rótulos/classe")
+    ax.grid(axis="x", alpha=0.25)
+    fig.tight_layout()
+    fig.savefig(
+        output_dir / "ganho_por_classe_orcamento_5_test_public.png",
+        dpi=200,
+    )
+    plt.close(fig)
+    return summary
+
+
 def final_test_report(args, experiments, class_names, aliases):
     """Avalia test_public somente depois de encerrados todos os treinamentos."""
     test_rows, class_rows = [], []
@@ -556,13 +603,28 @@ def main():
             test_f1_mean=("test_f1_macro", "mean"), test_f1_std=("test_f1_macro", "std"),
             test_accuracy_mean=("test_accuracy", "mean"), test_accuracy_std=("test_accuracy", "std"))
         test_summary.to_csv(args.output_dir / "curva_orcamento_test_public_final.csv", index=False)
-        fig, ax = plt.subplots(figsize=(7.5, 5))
+        save_test_public_class_gains(args.output_dir)
+
+        ceiling_rows = test_summary[
+            (test_summary["method"] == "supervised") & (test_summary["budget"] == 20)
+        ]
+        ceiling = float(ceiling_rows.iloc[0]["test_f1_mean"]) if len(ceiling_rows) else None
+
+        fig, ax = plt.subplots(figsize=(8.5, 5.5))
         for method, label in [("supervised", "Supervisionado (piso)"),
                               ("fixmatch_aligned", "FixMatch aligned")]:
             d = test_summary[test_summary.method == method].sort_values("budget")
             if len(d):
                 ax.errorbar(d.budget, d.test_f1_mean, yerr=d.test_f1_std.fillna(0),
                             marker="o", capsize=4, label=label)
+        if ceiling is not None:
+            ax.axhline(
+                ceiling,
+                color="#7a7a7a",
+                linestyle="--",
+                linewidth=2,
+                label=f"Teto supervisionado (20): {ceiling:.3f}",
+            )
         ax.set_xscale("log", base=10)
         ax.set_xticks([1, 5, 20], labels=["1", "5", "20"])
         ax.set_xlabel("Orçamento (rótulos por classe)")

@@ -4,3 +4,9 @@ __pycache__/
 venv/
 data/
 /data/pa3_dados.zip
+*.pth
+outputs/parte2/*diagnostico*
+outputs/parte2/*analise*
+outputs/parte2/analise_resultados.md
+outputs/parte3/*diagnostico*
+outputs/parte3/*analise*
